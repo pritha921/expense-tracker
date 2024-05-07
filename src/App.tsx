@@ -1,12 +1,19 @@
-import ExpenseForm from './components/ExpenseForm'
+import ExpenseForm from "./components/ExpenseForm";
+import NavBar from "./components/NavBar";
+
 
 const App = () => {
   return (
+    <>
     <div>
-      
-      <ExpenseForm></ExpenseForm>
+      <NavBar />
     </div>
-  )
-}
 
-export default App
+      <div>
+        <ExpenseForm />
+      </div>
+    </>
+  );
+};
+
+export default App;
