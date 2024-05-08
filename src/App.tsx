@@ -1,8 +1,7 @@
 import ExpenseForm from "./components/ExpenseForm";
 import NavBar from "./components/NavBar";
-
-
 const App = () => {
+  
   return (
     <>
     <div>
