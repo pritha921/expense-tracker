@@ -6,19 +6,28 @@ interface ExpenseListProps{
 }
 
 const ExpenseList = ({expenses}:ExpenseListProps) => {
+
   return (
     <div>
-      <h2>Expense List</h2>
-      {expenses.map((expense,index)=>(
-             <ExpenseItem
-             key={index}
-             date={expense.date}
-             details={expense.details}
-             amount={expense.amount}
-           />
-      ))}
-    </div>
-  )
-}
+    <h2>Expense List</h2>
+    {expenses.length === 0 ? (
+      <p>Nothing to show</p>
+    ) : (
+      <>
+        {expenses.map((expense, index) => (
+          <ExpenseItem
+            key={index}
+            date={expense.date}
+            details={expense.details}
+            amount={expense.amount}
+          />
+        ))}
+        
+      </>
+    )}
+  </div>
+);
+};
+
 
 export default ExpenseList
