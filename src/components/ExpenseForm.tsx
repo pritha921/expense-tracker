@@ -7,11 +7,15 @@ type FormFields={
     amount: number
 }
 
-const ExpenseForm = () => {
+type ExpenseFormProps = {
+  onAddExpense: (expense: FormFields) => void;
+};
+
+const ExpenseForm = ({onAddExpense}:ExpenseFormProps) => {
     const { register, handleSubmit,formState:{errors} }= useForm<FormFields>();
 
     const onSubmit: SubmitHandler<FormFields>=(data)=>{
-        console.log(data);
+        onAddExpense(data);
     }
   return (
     <>
