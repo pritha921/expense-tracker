@@ -1,10 +1,6 @@
-interface ExpenseItemProps{
-    date:string,
-    details:string,
-    amount:number
-}
+import Expense from "../models/Expenses"
 
-const ExpenseItem = ({date, details, amount}:ExpenseItemProps) => {
+const ExpenseItem = ({date, details, amount}:Expense) => {
   return (
     <div>
         <p>Date:{date}</p>
