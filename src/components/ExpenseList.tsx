@@ -6,7 +6,7 @@ interface ExpenseListProps{
 }
 
 const ExpenseList = ({expenses}:ExpenseListProps) => {
-
+  const totalExpenses = expenses.reduce((total, expense) => total + expense.amount,0);
   return (
     <div>
     <h2>Expense List</h2>
@@ -22,7 +22,7 @@ const ExpenseList = ({expenses}:ExpenseListProps) => {
             amount={expense.amount}
           />
         ))}
-        
+        <p>Total Expenses: {totalExpenses}</p>
       </>
     )}
   </div>

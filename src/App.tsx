@@ -2,11 +2,12 @@ import  { useState } from 'react';
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from './components/ExpenseList';
 import NavBar from "./components/NavBar";
+import Expense from './models/Expenses';
 
 const App = () => {
-  const [expenses, setExpenses]=useState<string[]>([])
+  const [expenses, setExpenses]=useState<Expense[]>([])
 
-  const addExpense = (expense: string) => {
+  const addExpense = (expense: Expense) => {
     setExpenses(prevExpenses => [...prevExpenses, expense]);
   };
 
