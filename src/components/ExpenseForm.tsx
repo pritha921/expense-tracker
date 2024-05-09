@@ -12,10 +12,11 @@ type ExpenseFormProps = {
 };
 
 const ExpenseForm = ({ onAddExpense }: ExpenseFormProps) => {
-    const { register, handleSubmit, formState: { errors } } = useForm<FormFields>();
+    const { register, handleSubmit, formState: { errors },reset } = useForm<FormFields>();
 
     const onSubmit: SubmitHandler<FormFields> = (data) => {
         onAddExpense(data);
+        reset();
     };
 
     return (

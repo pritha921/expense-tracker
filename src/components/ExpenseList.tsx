@@ -31,3 +31,4 @@ const ExpenseList = ({expenses}:ExpenseListProps) => {
 
 
 export default ExpenseList
+
