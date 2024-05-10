@@ -10,17 +10,21 @@ const App = () => {
   const addExpense = (expense: Expense) => {
     setExpenses(prevExpenses => [...prevExpenses, expense]);
   };
-
+  const handleDeleteExpense = (index: number) => {
+    const updatedExpenses = [...expenses];
+    updatedExpenses.splice(index, 1);
+    setExpenses(updatedExpenses);
+  }
   return (
     <>
       <div>
-        <NavBar />
+        <NavBar />  
       </div>
       <div>
         <ExpenseForm onAddExpense={addExpense} />
       </div>
       <div>
-        <ExpenseList expenses={expenses} />
+        <ExpenseList expenses={expenses} onDeleteExpense={handleDeleteExpense}/>
       </div>
     </>
   );
