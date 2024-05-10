@@ -1,23 +1,25 @@
 import { Button } from "@mui/material";
 import { SubmitHandler, useForm } from 'react-hook-form';
+import Expense from "../models/Expenses";
 
 type FormFields = {
     date: string,
     details: string,
-    amount: number
+    amount: string
 };
 
 type ExpenseFormProps = {
-    onAddExpense: (expense: FormFields) => void;
+    onAddExpense: (expense: Expense) => void;
 };
 
 const ExpenseForm = ({ onAddExpense }: ExpenseFormProps) => {
     const { register, handleSubmit, formState: { errors },reset } = useForm<FormFields>();
 
     const onSubmit: SubmitHandler<FormFields> = (data) => {
-        onAddExpense(data);
+        const submitData:Expense={...data, amount:parseFloat(data.amount)}
+        onAddExpense(submitData);
         reset();
-    };
+    };   
 
     return (
         <div style={{ maxWidth: '400px', margin: '20px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '5px' }}>
