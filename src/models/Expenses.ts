@@ -1,7 +1,8 @@
 interface Expense{
     date:string,
     details:string,
-    amount:number
+    amount:number,
+    category: string
 }
 
 export default Expense

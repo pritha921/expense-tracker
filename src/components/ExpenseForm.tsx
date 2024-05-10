@@ -5,7 +5,8 @@ import Expense from "../models/Expenses";
 type FormFields = {
     date: string,
     details: string,
-    amount: string
+    amount: string,
+    category: string
 };
 
 type ExpenseFormProps = {
@@ -13,20 +14,20 @@ type ExpenseFormProps = {
 };
 
 const ExpenseForm = ({ onAddExpense }: ExpenseFormProps) => {
-    const { register, handleSubmit, formState: { errors },reset } = useForm<FormFields>();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<FormFields>();
 
     const onSubmit: SubmitHandler<FormFields> = (data) => {
-        const submitData:Expense={...data, amount:parseFloat(data.amount)}
+        const submitData: Expense = { ...data, amount: parseFloat(data.amount) }
         onAddExpense(submitData);
         reset();
-    };   
+    };
 
     return (
         <div style={{ maxWidth: '400px', margin: '20px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '5px' }}>
             <h1 style={{ textAlign: 'center' }}>Expense Form</h1>
             <form onSubmit={handleSubmit(onSubmit)} style={{ padding: '0 20px' }}>
                 <div style={{ marginBottom: '10px' }}>
-                    <input {...register("date", { required: "Please enter the date" })} type="date" placeholder="Enter the date"  style={{ width: '100%', padding: '8px', marginBottom: '5px', borderRadius: '5px' }} />
+                    <input {...register("date", { required: "Please enter the date" })} type="date" placeholder="Enter the date" style={{ width: '100%', padding: '8px', marginBottom: '5px', borderRadius: '5px' }} />
                     {errors.date && (<div style={{ color: 'red' }}>{errors.date.message}</div>)}
                 </div>
                 <div style={{ marginBottom: '10px' }}>
@@ -34,8 +35,21 @@ const ExpenseForm = ({ onAddExpense }: ExpenseFormProps) => {
                     {errors.details && (<div style={{ color: 'red' }}>{errors.details.message}</div>)}
                 </div>
                 <div style={{ marginBottom: '10px' }}>
-                     <input {...register("amount", { required: "Please enter the amount", pattern: { value: /^[0-9]*$/, message: "Please enter a valid number" } })} type="number" placeholder="Enter the amount" style={{ width: '100%', padding: '8px', marginBottom: '5px', borderRadius: '5px' }} />
+                    <input {...register("amount", { required: "Please enter the amount", pattern: { value: /^[0-9]*$/, message: "Please enter a valid number" } })} type="number" placeholder="Enter the amount" style={{ width: '100%', padding: '8px', marginBottom: '5px', borderRadius: '5px' }} />
                     {errors.amount && (<div style={{ color: 'red' }}>{errors.amount.message}</div>)}
+                </div>
+                <div style={{ marginBottom: '10px' }}>
+                    <select {...register("category", { required: "Please select a category" })} style={{ width: '50%', padding: '8px', marginBottom: '5px', borderRadius: '5px' }}>
+                        <option value="">Select category</option>
+                        <option value="Food">Food</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Transportation">Transportation</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Study">Study</option>
+                        <option value="Miscellaneous">Miscellaneous</option>
+
+                    </select>
+                    {errors.category && (<div style={{ color: 'red' }}>{errors.category.message}</div>)}
                 </div>
                 <div style={{ marginBottom: '20px', textAlign: 'center' }}>
                     <Button type="submit" variant="contained" color="primary" style={{ width: '150px', borderRadius: '5px' }}>Add</Button>
@@ -46,7 +60,4 @@ const ExpenseForm = ({ onAddExpense }: ExpenseFormProps) => {
 };
 
 export default ExpenseForm;
-
-
-
 
