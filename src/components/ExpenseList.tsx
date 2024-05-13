@@ -81,31 +81,31 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
           <TableRow style={{ backgroundColor: "#f0f0f0" }}>
             <TableCell
               align="center"
-              style={{ fontSize: "18px", fontWeight: "bold" }}
+              style={{ fontSize: "18px", fontWeight: "bold", color:"#00215E"}}
             >
               Details
             </TableCell>
             <TableCell
               align="center"
-              style={{ fontSize: "18px", fontWeight: "bold" }}
+              style={{ fontSize: "18px", fontWeight: "bold", color:"#00215E" }}
             >
               Category
             </TableCell>
             <TableCell
               align="right"
-              style={{ fontSize: "18px", fontWeight: "bold" }}
+              style={{ fontSize: "18px", fontWeight: "bold" , color:"#00215E"}}
             >
               Amount
             </TableCell>
             <TableCell
               align="right"
-              style={{ fontSize: "18px", fontWeight: "bold" }}
+              style={{ fontSize: "18px", fontWeight: "bold", color:"#00215E" }}
             >
               Date
             </TableCell>
             <TableCell
               align="right"
-              style={{ fontSize: "18px", fontWeight: "bold" }}
+              style={{ fontSize: "18px", fontWeight: "bold", color:"#00215E" }}
             >
               Action
             </TableCell>

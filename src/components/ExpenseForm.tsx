@@ -28,7 +28,7 @@ const ExpenseForm = ({ onAddExpense }: ExpenseFormProps) => {
 
     return (
         <div style={{ maxWidth: '400px', margin: '20px auto', padding: '20px', border: '1px solid #007bff', borderRadius: '5px' }}>
-            <h1 style={{ textAlign: 'center' }}>Expense Form</h1>
+            <h1 style={{ textAlign: 'center' , color:"#00215E"}}>Expense Form</h1>
             <form onSubmit={handleSubmit(onSubmit)} style={{ padding: '0 20px' }}>
            
                 
