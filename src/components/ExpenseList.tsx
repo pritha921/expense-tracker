@@ -18,21 +18,23 @@ interface ExpenseListProps {
 function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
   const [selectedCategory, setSelectedCategory] = useState('');
 
-  const totalExpenses = expenses.reduce(
-    (total, expense) => total + expense.amount,
-    0
-  );
-
-  const handleDelete = (index: number) => {
-    onDeleteExpense(index);
-  };
-
+  
   const filteredExpenses = selectedCategory
     ? expenses.filter(expense => expense.category === selectedCategory)
     : expenses;
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(e.target.value);
+  };
+
+
+  const totalExpenses = filteredExpenses.reduce(
+    (total, expense) => total + expense.amount,
+    0
+  );
+
+  const handleDelete = (index: number) => {
+    onDeleteExpense(index);
   };
 
   return (
