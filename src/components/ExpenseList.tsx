@@ -55,7 +55,7 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
     <ThemeProvider theme={theme}>
     <TableContainer
       component={Paper}
-      style={{ maxWidth: "600px", margin: "20px auto" }}
+      style={{ maxWidth: "100%", margin: "20px auto" }}
     >
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
         <span style={{ marginRight: '10px' }}>Filter by Category:</span>
