@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -15,6 +16,8 @@ interface ExpenseListProps {
 }
 
 function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
+  const [selectedCategory, setSelectedCategory] = useState('');
+
   const totalExpenses = expenses.reduce(
     (total, expense) => total + expense.amount,
     0
@@ -24,11 +27,31 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
     onDeleteExpense(index);
   };
 
+  const filteredExpenses = selectedCategory
+    ? expenses.filter(expense => expense.category === selectedCategory)
+    : expenses;
+
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCategory(e.target.value);
+  };
+
   return (
     <TableContainer
       component={Paper}
       style={{ maxWidth: "600px", margin: "20px auto" }}
     >
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+        <span style={{ marginRight: '10px' }}>Filter by Category:</span>
+        <select value={selectedCategory} onChange={handleCategoryChange}>
+          <option value="">All Categories</option>
+          <option value="Food">Food</option>
+          <option value="Travel">Travel</option>
+          <option value="Transportation">Transportation</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Study">Study</option>
+          <option value="Miscellaneous">Miscellaneous</option>
+        </select>
+      </div>
       <Table aria-label="caption table">
         <caption
           style={{
@@ -42,7 +65,7 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
         </caption>
         <TableHead>
           <TableRow style={{ backgroundColor: "#f0f0f0" }}>
-          <TableCell style={{ fontSize: "18px", fontWeight: "bold" }}>
+            <TableCell style={{ fontSize: "18px", fontWeight: "bold" }}>
               Category
             </TableCell>
             <TableCell style={{ fontSize: "18px", fontWeight: "bold" }}>
@@ -69,12 +92,12 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {expenses.map((expense, index) => (
+          {filteredExpenses.map((expense, index) => (
             <TableRow
               key={index}
               style={{ backgroundColor: index % 2 === 0 ? "#f9f9f9" : "white" }}
             >
-                <TableCell
+              <TableCell
                 component="th"
                 scope="row"
                 style={{ fontSize: "16px" }}
@@ -113,3 +136,4 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
 }
 
 export default ExpenseList;
+
