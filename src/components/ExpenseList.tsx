@@ -18,7 +18,6 @@ interface ExpenseListProps {
 function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
   const [selectedCategory, setSelectedCategory] = useState('');
 
-  
   const filteredExpenses = selectedCategory
     ? expenses.filter(expense => expense.category === selectedCategory)
     : expenses;
@@ -26,7 +25,6 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(e.target.value);
   };
-
 
   const totalExpenses = filteredExpenses.reduce(
     (total, expense) => total + expense.amount,
@@ -67,17 +65,17 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
         </caption>
         <TableHead>
           <TableRow style={{ backgroundColor: "#f0f0f0" }}>
-            <TableCell style={{ fontSize: "18px", fontWeight: "bold" }}>
-              Category
-            </TableCell>
-            <TableCell style={{ fontSize: "18px", fontWeight: "bold" }}>
-              Date
-            </TableCell>
             <TableCell
               align="center"
               style={{ fontSize: "18px", fontWeight: "bold" }}
             >
               Details
+            </TableCell>
+            <TableCell
+              align="center"
+              style={{ fontSize: "18px", fontWeight: "bold" }}
+            >
+              Category
             </TableCell>
             <TableCell
               align="right"
@@ -89,7 +87,13 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
               align="right"
               style={{ fontSize: "18px", fontWeight: "bold" }}
             >
-              Actions
+              Date
+            </TableCell>
+            <TableCell
+              align="right"
+              style={{ fontSize: "18px", fontWeight: "bold" }}
+            >
+              Action
             </TableCell>
           </TableRow>
         </TableHead>
@@ -99,25 +103,17 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
               key={index}
               style={{ backgroundColor: index % 2 === 0 ? "#f9f9f9" : "white" }}
             >
-              <TableCell
-                component="th"
-                scope="row"
-                style={{ fontSize: "16px" }}
-              >
-                {expense.category}
-              </TableCell>
-              <TableCell
-                component="th"
-                scope="row"
-                style={{ fontSize: "16px" }}
-              >
-                {expense.date}
-              </TableCell>
               <TableCell align="center" style={{ fontSize: "16px" }}>
                 {expense.details}
               </TableCell>
+              <TableCell align="center" style={{ fontSize: "16px" }}>
+                {expense.category}
+              </TableCell>
               <TableCell align="right" style={{ fontSize: "16px" }}>
                 {expense.amount}
+              </TableCell>
+              <TableCell align="right" style={{ fontSize: "16px" }}>
+                {expense.date}
               </TableCell>
               <TableCell align="right">
                 <Button
@@ -138,4 +134,5 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
 }
 
 export default ExpenseList;
+
 
