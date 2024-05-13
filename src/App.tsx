@@ -3,6 +3,7 @@ import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from './components/ExpenseList';
 import NavBar from "./components/NavBar";
 import Expense from './models/Expenses';
+import './components/globalStyles.css'
 
 const App = () => {
   const [expenses, setExpenses]=useState<Expense[]>([])

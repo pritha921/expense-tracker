@@ -1,5 +1,5 @@
 import Expense from "../models/Expenses"
-
+import './components/globalStyles.css'
 const ExpenseItem = ({date, details, amount,category}:Expense) => {
   return (
     <div>

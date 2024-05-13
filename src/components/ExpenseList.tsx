@@ -9,6 +9,8 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Expense from "../models/Expenses";
+import categories from '../models/Data';
+
 
 interface ExpenseListProps {
   expenses: Expense[];
@@ -44,12 +46,9 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
         <span style={{ marginRight: '10px' }}>Filter by Category:</span>
         <select value={selectedCategory} onChange={handleCategoryChange}>
           <option value="">All Categories</option>
-          <option value="Food">Food</option>
-          <option value="Travel">Travel</option>
-          <option value="Transportation">Transportation</option>
-          <option value="Entertainment">Entertainment</option>
-          <option value="Study">Study</option>
-          <option value="Miscellaneous">Miscellaneous</option>
+          {categories.map((category, index) => (
+                            <option key={index} value={category}>{category}</option>
+                        ))}
         </select>
       </div>
       <Table aria-label="caption table">
