@@ -10,7 +10,19 @@ import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Expense from "../models/Expenses";
 import categories from '../models/Data';
+import "./globalStyles.css"
+import { ThemeProvider } from '@emotion/react';
+import { createTheme } from '@mui/material';
 
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Roboto',
+      'Reddit Sans', 
+      'sans-serif',
+    ].join(','),
+  },
+});
 
 interface ExpenseListProps {
   expenses: Expense[];
@@ -23,6 +35,8 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
   const filteredExpenses = selectedCategory
     ? expenses.filter(expense => expense.category === selectedCategory)
     : expenses;
+
+    filteredExpenses.sort((a, b) => a.details.localeCompare(b.details));
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(e.target.value);
@@ -38,6 +52,7 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
   };
 
   return (
+    <ThemeProvider theme={theme}>
     <TableContainer
       component={Paper}
       style={{ maxWidth: "600px", margin: "20px auto" }}
@@ -51,7 +66,7 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
                         ))}
         </select>
       </div>
-      <Table aria-label="caption table">
+      <Table aria-label="caption table" font->
         <caption
           style={{
             fontSize: "15px",
@@ -129,6 +144,7 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
         </TableBody>
       </Table>
     </TableContainer>
+    </ThemeProvider>
   );
 }
 
