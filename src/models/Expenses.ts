@@ -1,5 +1,5 @@
 interface Expense{
-    date:string,
+    date:Date,
     details:string,
     amount:number,
     category: string
