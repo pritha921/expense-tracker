@@ -1,21 +1,32 @@
-import  { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from './components/ExpenseList';
 import NavBar from "./components/NavBar";
 import Expense from './models/Expenses';
-import './components/globalStyles.css'
+import './components/globalStyles.css';
 
 const App = () => {
-  const [expenses, setExpenses]=useState<Expense[]>([])
+
+  const [expenses, setExpenses] = useState<Expense[]>(() => {
+    const savedExpenses = localStorage.getItem('expenses');
+    return savedExpenses ? JSON.parse(savedExpenses) : [];
+  });
+
+ 
+  useEffect(() => {
+    localStorage.setItem('expenses', JSON.stringify(expenses));
+  }, [expenses]);
 
   const addExpense = (expense: Expense) => {
     setExpenses(prevExpenses => [...prevExpenses, expense]);
   };
+
   const handleDeleteExpense = (index: number) => {
     const updatedExpenses = [...expenses];
     updatedExpenses.splice(index, 1);
     setExpenses(updatedExpenses);
   }
+
   return (
     <>
       <div>
@@ -30,6 +41,5 @@ const App = () => {
     </>
   );
 };
-
 
 export default App;
