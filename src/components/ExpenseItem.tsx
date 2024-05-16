@@ -7,7 +7,7 @@ const ExpenseItem = ({ date, details, amount,category}:Expense) => {
         <p>Details:{details}</p>
         <p>Category:{category}</p>
         <p>Amount:{amount}</p>
-        <p>Date:{date}</p>
+        <p>Date:{date.toLocaleDateString()}</p>
         
       
     </div>

@@ -128,7 +128,7 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
               </TableCell>
               <TableCell align="right" style={{ fontSize: "16px" }}>
         
-                {expense.date}
+                {expense.date.toLocaleDateString()}
               </TableCell>
               <TableCell align="right">
                 <Button
