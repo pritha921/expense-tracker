@@ -50,7 +50,7 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
   const handleDelete = (index: number) => {
     onDeleteExpense(index);
   };
-
+ console.log(Date)
   return (
     <ThemeProvider theme={theme}>
     <TableContainer
@@ -127,6 +127,7 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
                 {expense.amount}
               </TableCell>
               <TableCell align="right" style={{ fontSize: "16px" }}>
+        
                 {expense.date}
               </TableCell>
               <TableCell align="right">
