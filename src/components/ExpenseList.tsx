@@ -35,7 +35,7 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
     ? expenses.filter(expense => expense.category === selectedCategory)
     : expenses;
 
-    filteredExpenses.sort((a, b) => a.details.localeCompare(b.details));
+  filteredExpenses.sort((a, b) => a.details.localeCompare(b.details));
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(e.target.value);
@@ -51,102 +51,99 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
   };
   return (
     <ThemeProvider theme={theme}>
-    <TableContainer
-      component={Paper}
-      style={{ maxWidth: "100%", margin: "20px auto" }}
-    >
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-        <span style={{ marginRight: '10px' }}>Filter by Category:</span>
-        <select value={selectedCategory} onChange={handleCategoryChange}>
-          <option value="">All Categories</option>
-          {categories.map((category, index) => (
-                            <option key={index} value={category}>{category}</option>
-                        ))}
-        </select>
-      </div>
-      <Table aria-label="caption table" font->
-        <caption
-          style={{
-            fontSize: "15px",
-            fontWeight: "normal",
-            textAlign: "right",
-            marginBottom: "10px",
-          }}
-        >
-          <Button variant="outlined">Total Expenses: {totalExpenses}</Button>
-        </caption>
-        <TableHead>
-          <TableRow style={{ backgroundColor: "#f0f0f0" }}>
-            <TableCell
-              align="center"
-              style={{ fontSize: "18px", fontWeight: "bold", color:"#00215E"}}
-            >
-              Details
-            </TableCell>
-            <TableCell
-              align="center"
-              style={{ fontSize: "18px", fontWeight: "bold", color:"#00215E" }}
-            >
-              Category
-            </TableCell>
-            <TableCell
-              align="right"
-              style={{ fontSize: "18px", fontWeight: "bold" , color:"#00215E"}}
-            >
-              Amount
-            </TableCell>
-            <TableCell
-              align="right"
-              style={{ fontSize: "18px", fontWeight: "bold", color:"#00215E" }}
-            >
-              Date
-            </TableCell>
-            <TableCell
-              align="right"
-              style={{ fontSize: "18px", fontWeight: "bold", color:"#00215E" }}
-            >
-              Action
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {filteredExpenses.map((expense, index) => (
-            <TableRow
-              key={index}
-              style={{ backgroundColor: index % 2 === 0 ? "#f9f9f9" : "white" }}
-            >
-              <TableCell align="center" style={{ fontSize: "16px" }}>
-                {expense.details}
+      <TableContainer
+        component={Paper}
+        style={{ maxWidth: "100%", margin: "20px auto" }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+          <span style={{ marginRight: '10px' }}>Filter by Category:</span>
+          <select value={selectedCategory} onChange={handleCategoryChange}>
+            <option value="">All Categories</option>
+            {categories.map((category, index) => (
+              <option key={index} value={category}>{category}</option>
+            ))}
+          </select>
+        </div>
+        <Table aria-label="caption table">
+          <caption
+            style={{
+              fontSize: "15px",
+              fontWeight: "normal",
+              textAlign: "right",
+              marginBottom: "10px",
+            }}
+          >
+            <Button variant="outlined">Total Expenses: {totalExpenses}</Button>
+          </caption>
+          <TableHead>
+            <TableRow style={{ backgroundColor: "#f0f0f0" }}>
+              <TableCell
+                align="center"
+                style={{ fontSize: "18px", fontWeight: "bold", color:"#00215E"}}
+              >
+                Details
               </TableCell>
-              <TableCell align="center" style={{ fontSize: "16px" }}>
-                {expense.category}
+              <TableCell
+                align="center"
+                style={{ fontSize: "18px", fontWeight: "bold", color:"#00215E" }}
+              >
+                Category
               </TableCell>
-              <TableCell align="right" style={{ fontSize: "16px" }}>
-                {expense.amount}
+              <TableCell
+                align="right"
+                style={{ fontSize: "18px", fontWeight: "bold" , color:"#00215E"}}
+              >
+                Amount
               </TableCell>
-              <TableCell align="right" style={{ fontSize: "16px" }}>
-        
-                {expense.date.toLocaleDateString()}
+              <TableCell
+                align="right"
+                style={{ fontSize: "18px", fontWeight: "bold", color:"#00215E" }}
+              >
+                Date
               </TableCell>
-              <TableCell align="right">
-                <Button
-                  variant="outlined"
-                  color="error"
-                  startIcon={<DeleteIcon />}
-                  onClick={() => handleDelete(index)}
-                >
-                  Delete
-                </Button>
+              <TableCell
+                align="right"
+                style={{ fontSize: "18px", fontWeight: "bold", color:"#00215E" }}
+              >
+                Action
               </TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {filteredExpenses.map((expense, index) => (
+              <TableRow
+                key={index}
+                style={{ backgroundColor: index % 2 === 0 ? "#f9f9f9" : "white" }}
+              >
+                <TableCell align="center" style={{ fontSize: "16px" }}>
+                  {expense.details}
+                </TableCell>
+                <TableCell align="center" style={{ fontSize: "16px" }}>
+                  {expense.category}
+                </TableCell>
+                <TableCell align="right" style={{ fontSize: "16px" }}>
+                  {expense.amount}
+                </TableCell>
+                <TableCell align="right" style={{ fontSize: "16px" }}>
+                  {expense.date instanceof Date ? expense.date.toLocaleDateString() : 'Invalid Date'}
+                </TableCell>
+                <TableCell align="right">
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    startIcon={<DeleteIcon />}
+                    onClick={() => handleDelete(index)}
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </ThemeProvider>
   );
 }
 
 export default ExpenseList;
-
-
