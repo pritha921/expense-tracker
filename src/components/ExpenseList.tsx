@@ -31,7 +31,6 @@ interface ExpenseListProps {
 
 function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
   const [selectedCategory, setSelectedCategory] = useState('');
-
   const filteredExpenses = selectedCategory
     ? expenses.filter(expense => expense.category === selectedCategory)
     : expenses;
@@ -50,7 +49,6 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
   const handleDelete = (index: number) => {
     onDeleteExpense(index);
   };
- console.log(Date)
   return (
     <ThemeProvider theme={theme}>
     <TableContainer
