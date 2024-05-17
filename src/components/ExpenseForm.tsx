@@ -34,6 +34,7 @@ const ExpenseForm = ({ onAddExpense }: ExpenseFormProps) => {
       date: selectedDate!,
       amount: parseFloat(data.amount),
     };
+    console.log(typeof selectedDate);
     onAddExpense(submitData);
     reset();
   };

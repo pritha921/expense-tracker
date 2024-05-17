@@ -6,15 +6,24 @@ import Expense from './models/Expenses';
 import './components/globalStyles.css';
 
 const App = () => {
-
   const [expenses, setExpenses] = useState<Expense[]>(() => {
     const savedExpenses = localStorage.getItem('expenses');
-    return savedExpenses ? JSON.parse(savedExpenses) : [];
+    if (savedExpenses) {
+      const parsedExpenses = JSON.parse(savedExpenses);
+      return parsedExpenses.map((expense: Expense) => ({
+        ...expense,
+        date: new Date(expense.date)
+      }));
+    }
+    return [];
   });
 
- 
   useEffect(() => {
-    localStorage.setItem('expenses', JSON.stringify(expenses));
+    const addExpenses = expenses.map(expense => ({
+      ...expense,
+      date: expense.date.toISOString()
+    }));
+    localStorage.setItem('expenses', JSON.stringify(addExpenses));
   }, [expenses]);
 
   const addExpense = (expense: Expense) => {
