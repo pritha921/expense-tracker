@@ -37,6 +37,7 @@ const ExpenseForm = ({ onAddExpense }: ExpenseFormProps) => {
     console.log(typeof selectedDate);
     onAddExpense(submitData);
     reset();
+    setSelectedDate(null);
   };
 
   return (
