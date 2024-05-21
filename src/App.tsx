@@ -37,7 +37,7 @@ const App = () => {
   }
 
   return (
-    <>
+    <div className="app-container">
       <div>
         <NavBar />  
       </div>
@@ -47,7 +47,7 @@ const App = () => {
       <div>
         <ExpenseList expenses={expenses} onDeleteExpense={handleDeleteExpense}/>
       </div>
-    </>
+    </div>
   );
 };
 

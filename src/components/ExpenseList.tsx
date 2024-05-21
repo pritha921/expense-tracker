@@ -7,12 +7,13 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-import DeleteIcon from "@mui/icons-material/Delete";
+// import DeleteIcon from "@mui/icons-material/Delete";
 import Expense from "../models/Expenses";
 import categories from '../models/Data';
-import "./globalStyles.css"
+import "./globalStyles.css";
 import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material';
+import ExpenseItem from './ExpenseItem';
 
 const theme = createTheme({
   typography: {
@@ -49,6 +50,7 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
   const handleDelete = (index: number) => {
     onDeleteExpense(index);
   };
+
   return (
     <ThemeProvider theme={theme}>
       <TableContainer
@@ -115,28 +117,10 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
                 key={index}
                 style={{ backgroundColor: index % 2 === 0 ? "#f9f9f9" : "white" }}
               >
-                <TableCell align="center" style={{ fontSize: "16px" }}>
-                  {expense.details}
-                </TableCell>
-                <TableCell align="center" style={{ fontSize: "16px" }}>
-                  {expense.category}
-                </TableCell>
-                <TableCell align="right" style={{ fontSize: "16px" }}>
-                  {expense.amount}
-                </TableCell>
-                <TableCell align="right" style={{ fontSize: "16px" }}>
-                  {expense.date instanceof Date ? expense.date.toLocaleDateString() : 'Invalid Date'}
-                </TableCell>
-                <TableCell align="right">
-                  <Button
-                    variant="outlined"
-                    color="error"
-                    startIcon={<DeleteIcon />}
-                    onClick={() => handleDelete(index)}
-                  >
-                    Delete
-                  </Button>
-                </TableCell>
+                <ExpenseItem 
+                  expense={expense}
+                  onDelete={() => handleDelete(index)}
+                />
               </TableRow>
             ))}
           </TableBody>
@@ -147,3 +131,4 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
 }
 
 export default ExpenseList;
+

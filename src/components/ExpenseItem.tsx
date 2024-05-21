@@ -1,17 +1,41 @@
-import Expense from "../models/Expenses"
-import './components/globalStyles.css'
-const ExpenseItem = ({ date, details, amount,category}:Expense) => {
-  return (
-    <div>
-       
-        <p>Details:{details}</p>
-        <p>Category:{category}</p>
-        <p>Amount:{amount}</p>
-        <p>Date:{date.toLocaleDateString()}</p>
-        
-      
-    </div>
-  )
+import Expense from "../models/Expenses";
+import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
+import './globalStyles.css';
+import { TableCell } from "@mui/material";
+
+interface ExpenseItemProps {
+  expense: Expense;
+  onDelete: () => void;
 }
 
-export default ExpenseItem
+const ExpenseItem = ({ expense, onDelete }: ExpenseItemProps) => {
+  return (
+    <>
+      <TableCell align="center" style={{ fontSize: "16px" }}>
+        {expense.details}
+      </TableCell>
+      <TableCell align="center" style={{ fontSize: "16px" }}>
+        {expense.category}
+      </TableCell>
+      <TableCell align="right" style={{ fontSize: "16px" }}>
+        {expense.amount}
+      </TableCell>
+      <TableCell align="right" style={{ fontSize: "16px" }}>
+        {expense.date instanceof Date ? expense.date.toLocaleDateString() : 'Invalid Date'}
+      </TableCell>
+      <TableCell align="right">
+        <Button
+          variant="outlined"
+          color="error"
+          startIcon={<DeleteIcon />}
+          onClick={onDelete}
+        >
+          Delete
+        </Button>
+      </TableCell>
+    </>
+  );
+};
+
+export default ExpenseItem;
