@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,19 +9,15 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 // import DeleteIcon from "@mui/icons-material/Delete";
 import Expense from "../models/Expenses";
-import categories from '../models/Data';
+import categories from "../models/Data";
 import "./globalStyles.css";
-import { ThemeProvider } from '@emotion/react';
-import { createTheme } from '@mui/material';
-import ExpenseItem from './ExpenseItem';
+import { ThemeProvider } from "@emotion/react";
+import { createTheme } from "@mui/material";
+import ExpenseItem from "./ExpenseItem";
 
 const theme = createTheme({
   typography: {
-    fontFamily: [
-      'Roboto',
-      'Reddit Sans', 
-      'sans-serif',
-    ].join(','),
+    fontFamily: ["Roboto", "Reddit Sans", "sans-serif"].join(","),
   },
 });
 
@@ -31,9 +27,9 @@ interface ExpenseListProps {
 }
 
 function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState("");
   const filteredExpenses = selectedCategory
-    ? expenses.filter(expense => expense.category === selectedCategory)
+    ? expenses.filter((expense) => expense.category === selectedCategory)
     : expenses;
 
   filteredExpenses.sort((a, b) => a.details.localeCompare(b.details));
@@ -57,12 +53,20 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
         component={Paper}
         style={{ maxWidth: "100%", margin: "20px auto" }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-          <span style={{ marginRight: '10px' }}>Filter by Category:</span>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            marginBottom: "10px",
+          }}
+        >
+          <span style={{ marginRight: "10px" }}>Filter by Category:</span>
           <select value={selectedCategory} onChange={handleCategoryChange}>
             <option value="">All Categories</option>
             {categories.map((category, index) => (
-              <option key={index} value={category}>{category}</option>
+              <option key={index} value={category}>
+                {category}
+              </option>
             ))}
           </select>
         </div>
@@ -81,31 +85,51 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
             <TableRow style={{ backgroundColor: "#f0f0f0" }}>
               <TableCell
                 align="center"
-                style={{ fontSize: "18px", fontWeight: "bold", color:"#00215E"}}
+                style={{
+                  fontSize: "18px",
+                  fontWeight: "bold",
+                  color: "#00215E",
+                }}
               >
                 Details
               </TableCell>
               <TableCell
                 align="center"
-                style={{ fontSize: "18px", fontWeight: "bold", color:"#00215E" }}
+                style={{
+                  fontSize: "18px",
+                  fontWeight: "bold",
+                  color: "#00215E",
+                }}
               >
                 Category
               </TableCell>
               <TableCell
                 align="right"
-                style={{ fontSize: "18px", fontWeight: "bold" , color:"#00215E"}}
+                style={{
+                  fontSize: "18px",
+                  fontWeight: "bold",
+                  color: "#00215E",
+                }}
               >
                 Amount
               </TableCell>
               <TableCell
                 align="right"
-                style={{ fontSize: "18px", fontWeight: "bold", color:"#00215E" }}
+                style={{
+                  fontSize: "18px",
+                  fontWeight: "bold",
+                  color: "#00215E",
+                }}
               >
                 Date
               </TableCell>
               <TableCell
                 align="right"
-                style={{ fontSize: "18px", fontWeight: "bold", color:"#00215E" }}
+                style={{
+                  fontSize: "18px",
+                  fontWeight: "bold",
+                  color: "#00215E",
+                }}
               >
                 Action
               </TableCell>
@@ -113,15 +137,12 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
           </TableHead>
           <TableBody>
             {filteredExpenses.map((expense, index) => (
-              <TableRow
-                key={index}
-                style={{ backgroundColor: index % 2 === 0 ? "#f9f9f9" : "white" }}
-              >
-                <ExpenseItem 
-                  expense={expense}
-                  onDelete={() => handleDelete(index)}
-                />
-              </TableRow>
+              <ExpenseItem 
+              rowBackgroundColor={index % 2 === 0 ? "#f9f9f9" : "white"}
+              key={index}
+                expense={expense}
+                onDelete={() => handleDelete(index)}
+              />
             ))}
           </TableBody>
         </Table>
@@ -131,4 +152,3 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
 }
 
 export default ExpenseList;
-
