@@ -31,8 +31,9 @@ export default function ButtonAppBar() {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
+        sx={{ color: 'white' }}
       >
-       Color
+        Color
       </Button>
       <Menu
         id="basic-menu"
@@ -43,7 +44,7 @@ export default function ButtonAppBar() {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Blue</MenuItem>
+        <MenuItem  onClick={handleClose}>Blue</MenuItem>
         <MenuItem onClick={handleClose}>Green</MenuItem>
       </Menu>
           <Button color="inherit">Add New Expense</Button>
@@ -53,36 +54,4 @@ export default function ButtonAppBar() {
   );
 }
 
-// import AppBar from '@mui/material/AppBar';
-// import Box from '@mui/material/Box';
-// import Toolbar from '@mui/material/Toolbar';
-// import Typography from '@mui/material/Typography';
-// import Button from '@mui/material/Button';
-// import Select from '@mui/material/Select';
-// import MenuItem from '@mui/material/MenuItem';
-
-// export default function ButtonAppBar() {
-//   return (
-//     <Box sx={{ flexGrow: 1 }}>
-//       <AppBar position="static">
-//         <Toolbar>
-//           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-//             My Expense Tracker
-//           </Typography>
-//           <Select
-//             defaultValue=""
-//             sx={{ color: 'white', borderColor: 'white', marginRight: 2 }}
-//             variant="outlined"
-//             inputProps={{ 'aria-label': 'Without label' }}
-//           >
-//             <MenuItem value="green">Green</MenuItem>
-//             <MenuItem value="blue">Blue</MenuItem>
-//           </Select>
-//           <Button color="inherit">Add New Expense</Button>
-//         </Toolbar>
-//       </AppBar>
-//     </Box>
-//   );
-// }
-
-
+// In this component which navbar I Have, 
