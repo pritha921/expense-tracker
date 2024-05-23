@@ -17,9 +17,11 @@ type FormFields = {
 
 type ExpenseFormProps = {
   onAddExpense: (expense: Expense) => void;
+  buttonColor: string;
 };
 
-const ExpenseForm = ({ onAddExpense }: ExpenseFormProps) => {
+
+const ExpenseForm = ({ onAddExpense, buttonColor }: ExpenseFormProps,) => {
   const {
     register,
     handleSubmit,
@@ -129,14 +131,9 @@ const ExpenseForm = ({ onAddExpense }: ExpenseFormProps) => {
           )}
         </div>
         <div style={{ marginBottom: "20px", textAlign: "center" }}>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            style={{ width: "150px", borderRadius: "5px" }}
-          >
-            Add
-          </Button>
+            <Button type="submit" variant="contained" style={{ backgroundColor: buttonColor }}>
+        Add Expense
+      </Button>
         </div>
       </form>
     </div>
