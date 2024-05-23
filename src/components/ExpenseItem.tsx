@@ -8,16 +8,18 @@ interface ExpenseItemProps {
   expense: Expense;
   onDelete: () => void;
   rowBackgroundColor?: string;
+  selectedColor:string,
 }
 
 const ExpenseItem = ({
   expense,
   onDelete,
   rowBackgroundColor = "white",
+  selectedColor
 }: ExpenseItemProps) => {
   return (
     <TableRow style={{ backgroundColor: rowBackgroundColor }}>
-      <TableCell align="center" style={{ fontSize: "16px" }}>
+      <TableCell align="center" style={{ fontSize: "16px" , color:selectedColor}}>
         {expense.details}
       </TableCell>
       <TableCell align="center" style={{ fontSize: "16px" }}>

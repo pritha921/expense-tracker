@@ -18,7 +18,7 @@ const App = () => {
     return [];
   });
 
-  const [buttonColor, setButtonColor] = useState<string>("Blue");
+  const [selectedColor, setSelectedColor] = useState<string>("blue");
 
   useEffect(() => {
     const addExpenses = expenses.map(expense => ({
@@ -41,13 +41,13 @@ const App = () => {
   return (
     <div className="app-container">
       <div>
-        <NavBar buttonColor={buttonColor} setButtonColor={setButtonColor}/>  
+        <NavBar selectedColor={selectedColor} onSetSelectedColor={setSelectedColor}/>  
       </div>
       <div>
-        <ExpenseForm onAddExpense={addExpense} buttonColor={buttonColor}/>
+        <ExpenseForm onAddExpense={addExpense} buttonColor={selectedColor}/>
       </div>
       <div>
-        <ExpenseList expenses={expenses} onDeleteExpense={handleDeleteExpense}/>
+        <ExpenseList expenses={expenses} onDeleteExpense={handleDeleteExpense} selectedColor={selectedColor}/>
       </div>
     </div>
   );

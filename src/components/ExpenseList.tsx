@@ -24,9 +24,11 @@ const theme = createTheme({
 interface ExpenseListProps {
   expenses: Expense[];
   onDeleteExpense: (index: number) => void;
+  selectedColor:string,
+  
 }
 
-function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
+function ExpenseList({ expenses, onDeleteExpense, selectedColor}: ExpenseListProps) {
   const [selectedCategory, setSelectedCategory] = useState("");
   const filteredExpenses = selectedCategory
     ? expenses.filter((expense) => expense.category === selectedCategory)
@@ -137,7 +139,7 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
           </TableHead>
           <TableBody>
             {filteredExpenses.map((expense, index) => (
-              <ExpenseItem 
+              <ExpenseItem selectedColor={selectedColor}
               rowBackgroundColor={index % 2 === 0 ? "#f9f9f9" : "white"}
               key={index}
                 expense={expense}

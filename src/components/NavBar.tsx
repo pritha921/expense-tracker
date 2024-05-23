@@ -9,13 +9,13 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 interface ButtonAppBarProps {
-  buttonColor: string;
-  setButtonColor: (color: string) => void;
+  selectedColor: string;
+  onSetSelectedColor: (color: string) => void;
 }
 
-export default function ButtonAppBar({ buttonColor, setButtonColor }: ButtonAppBarProps) {
+export default function ButtonAppBar({ selectedColor, onSetSelectedColor }: ButtonAppBarProps) {
   const handleChange = (event: SelectChangeEvent) => {
-    setButtonColor(event.target.value as string);
+    onSetSelectedColor(event.target.value as string);
   };
 
   return (
@@ -31,7 +31,7 @@ export default function ButtonAppBar({ buttonColor, setButtonColor }: ButtonAppB
               <Select
                 labelId="color-select-label"
                 id="color-select"
-                value={buttonColor}
+                value={selectedColor}
                 label="Color"
                 onChange={handleChange}
               >
