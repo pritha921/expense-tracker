@@ -1,23 +1,41 @@
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+
+function BasicSelect() {
+  const [color, setColor] = React.useState("");
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setColor(event.target.value as string);
+  };
+
+  return (
+    <Box sx={{ minWidth: 120 }}>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Color</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={color}
+          label="Age"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Blue</MenuItem>
+          <MenuItem value={20}>Green</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
+  );
+}
+
 export default function ButtonAppBar() {
-
-
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -25,28 +43,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             My Expense Tracker
           </Typography>
-          <Button
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-        sx={{ color: 'white' }}
-      >
-        Color
-      </Button>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl} 
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      >
-        <MenuItem  onClick={handleClose}>Blue</MenuItem>
-        <MenuItem onClick={handleClose}>Green</MenuItem>
-      </Menu>
+          <BasicSelect />
           <Button color="inherit">Add New Expense</Button>
         </Toolbar>
       </AppBar>
