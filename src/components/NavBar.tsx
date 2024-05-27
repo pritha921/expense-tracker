@@ -7,13 +7,14 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { useContext } from "react";
+import ColorContext from "../models/ColorContext";
 
-interface ButtonAppBarProps {
-  selectedColor: string;
-  onSetSelectedColor: (color: string) => void;
-}
 
-export default function ButtonAppBar({ selectedColor, onSetSelectedColor }: ButtonAppBarProps) {
+
+export default function ButtonAppBar() {
+  const {selectedColor, setSelectedColor:onSetSelectedColor}=useContext(ColorContext)
+  
   const handleChange = (event: SelectChangeEvent) => {
     onSetSelectedColor(event.target.value as string);
   };
