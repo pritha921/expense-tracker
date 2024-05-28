@@ -24,7 +24,7 @@ const App = () => {
   useEffect(() => {
     const addExpenses = expenses.map((expense) => ({
       ...expense,
-      date: expense.date.toISOString(),
+      date: new Date(expense.date).toISOString(),
     }));
     localStorage.setItem("expenses", JSON.stringify(addExpenses));
   }, [expenses]);

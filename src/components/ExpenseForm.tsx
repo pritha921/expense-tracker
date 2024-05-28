@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@mui/material";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm, Controller } from "react-hook-form";
 import Expense from "../models/Expenses";
 import categories from "../models/Data";
 import "../App.css";
@@ -20,13 +20,13 @@ type ExpenseFormProps = {
   buttonColor: string;
 };
 
-
-const ExpenseForm = ({ onAddExpense, buttonColor }: ExpenseFormProps,) => {
+const ExpenseForm = ({ onAddExpense, buttonColor }: ExpenseFormProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    control,
   } = useForm<FormFields>();
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
@@ -55,12 +55,22 @@ const ExpenseForm = ({ onAddExpense, buttonColor }: ExpenseFormProps,) => {
       <h1 style={{ textAlign: "center", color: "#00215E" }}>Expense Form</h1>
       <form onSubmit={handleSubmit(onSubmit)} style={{ padding: "0 20px" }}>
         <div style={{ marginBottom: "10px" }}>
-          <DatePicker
-            selected={selectedDate}
-            onChange={(date: Date | null) => setSelectedDate(date)}
-            dateFormat="yyyy-MM-dd"
-            placeholderText="Select date"
-            className="custom-input custom-datepicker"
+          <Controller
+            name="date"
+            control={control}
+            rules={{ required: "Please select a date" }}
+            render={({ field }) => (
+              <DatePicker
+                selected={selectedDate}
+                onChange={(date) => {
+                  setSelectedDate(date);
+                  field.onChange(date);
+                }}
+                dateFormat="yyyy-MM-dd"
+                placeholderText="Select date"
+                className="custom-input custom-datepicker"
+              />
+            )}
           />
           {errors.date && (
             <div style={{ color: "red" }}>{errors.date.message}</div>
@@ -131,9 +141,13 @@ const ExpenseForm = ({ onAddExpense, buttonColor }: ExpenseFormProps,) => {
           )}
         </div>
         <div style={{ marginBottom: "20px", textAlign: "center" }}>
-            <Button type="submit" variant="contained" style={{ backgroundColor: buttonColor }}>
-        Add Expense
-      </Button>
+          <Button
+            type="submit"
+            variant="contained"
+            style={{ backgroundColor: buttonColor }}
+          >
+            Add Expense
+          </Button>
         </div>
       </form>
     </div>
