@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "@mui/material";
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
 import Expense from "../models/Expenses";
@@ -28,18 +27,18 @@ const ExpenseForm = ({ onAddExpense, buttonColor }: ExpenseFormProps) => {
     reset,
     control,
   } = useForm<FormFields>();
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+ 
 
   const onSubmit: SubmitHandler<FormFields> = (data) => {
     const submitData: Expense = {
       ...data,
-      date: selectedDate!,
+   
       amount: parseFloat(data.amount),
     };
-    console.log(typeof selectedDate);
+    console.log(data);
     onAddExpense(submitData);
     reset();
-    setSelectedDate(null);
+    
   };
 
   return (
@@ -61,9 +60,8 @@ const ExpenseForm = ({ onAddExpense, buttonColor }: ExpenseFormProps) => {
             rules={{ required: "Please select a date" }}
             render={({ field }) => (
               <DatePicker
-                selected={selectedDate}
+                selected={field.value}
                 onChange={(date) => {
-                  setSelectedDate(date);
                   field.onChange(date);
                 }}
                 dateFormat="yyyy-MM-dd"
