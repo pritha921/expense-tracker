@@ -56,6 +56,9 @@ const ExpenseForm = ({ onAddExpense, buttonColor }: ExpenseFormProps,) => {
       <form onSubmit={handleSubmit(onSubmit)} style={{ padding: "0 20px" }}>
         <div style={{ marginBottom: "10px" }}>
           <DatePicker
+           {...register("date", {
+            required: "Please enter the date",
+          })}
             selected={selectedDate}
             onChange={(date: Date | null) => setSelectedDate(date)}
             dateFormat="yyyy-MM-dd"
