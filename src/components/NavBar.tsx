@@ -2,19 +2,19 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useContext } from "react";
 import ColorContext from "../models/ColorContext";
-
-
+import { Link } from "react-router-dom";
+import ExpenseForm from "./components/ExpenseForm";
 
 export default function ButtonAppBar() {
-  const {selectedColor, setSelectedColor:onSetSelectedColor}=useContext(ColorContext)
-  
+  const { selectedColor, setSelectedColor: onSetSelectedColor } =
+    useContext(ColorContext);
+
   const handleChange = (event: SelectChangeEvent) => {
     onSetSelectedColor(event.target.value as string);
   };
@@ -41,7 +41,9 @@ export default function ButtonAppBar() {
               </Select>
             </FormControl>
           </Box>
-          <Button color="inherit">Add New Expense</Button>
+          <Link to="./ExpenseForm">
+            <button color="inherit">Add New Expense</button>
+          </Link>
         </Toolbar>
       </AppBar>
     </Box>
