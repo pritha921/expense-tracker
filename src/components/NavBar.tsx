@@ -7,9 +7,9 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useContext } from "react";
+
 import ColorContext from "../models/ColorContext";
 import { Link } from "react-router-dom";
-import ExpenseForm from "./components/ExpenseForm";
 
 export default function ButtonAppBar() {
   const { selectedColor, setSelectedColor: onSetSelectedColor } =
@@ -41,8 +41,11 @@ export default function ButtonAppBar() {
               </Select>
             </FormControl>
           </Box>
-          <Link to="./ExpenseForm">
-            <button color="inherit">Add New Expense</button>
+
+          <Link to="/add" style={{ color: '#ffffff' }}>
+            <button style={{ color: 'inherit', background: 'none', border: 'none' }}>
+              Add New Expense
+            </button>
           </Link>
         </Toolbar>
       </AppBar>

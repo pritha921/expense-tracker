@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import ExpenseForm from "./components/ExpenseForm";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ExpenseList from "./components/ExpenseList";
 import NavBar from "./components/NavBar";
+import AddNewExpenses from "./components/AddNewExpenses";
 import Expense from "./models/Expenses";
 import "./components/globalStyles.css";
 import ColorContext from "./models/ColorContext";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 const App = () => {
   const [expenses, setExpenses] = useState<Expense[]>(() => {
@@ -25,14 +25,10 @@ const App = () => {
   useEffect(() => {
     const addExpenses = expenses.map((expense) => ({
       ...expense,
-      date: new Date(expense.date).toISOString(),
+      date: expense.date.toISOString(),
     }));
     localStorage.setItem("expenses", JSON.stringify(addExpenses));
   }, [expenses]);
-
-  const addExpense = (expense: Expense) => {
-    setExpenses((prevExpenses) => [...prevExpenses, expense]);
-  };
 
   const handleDeleteExpense = (index: number) => {
     const updatedExpenses = [...expenses];
@@ -41,42 +37,29 @@ const App = () => {
   };
 
   return (
-    <>
-      <ColorContext.Provider
-        value={{
-          selectedColor,
-          setSelectedColor: (color) => setSelectedColor(color),
-        }}
-      >
-        <BrowserRouter>
-          <div className="app-container">
-            <div>
-              <NavBar />
-            </div>
-            <div>
-              <Routes>
-                <Route
-                  path="/add"
-                  render={() => (
-                    <ExpenseForm
-                      onAddExpense={addExpense}
-                      buttonColor={selectedColor}
-                    />
-                  )}
-                />
-              </Routes>
-            </div>
-            <div>
+    <ColorContext.Provider
+      value={{
+        selectedColor,
+        setSelectedColor: (color) => setSelectedColor(color),
+      }}
+    >
+      <Router>
+        <div className="app-container">
+          <NavBar />
+          <Routes>
+            <Route path="/" element={
               <ExpenseList
                 expenses={expenses}
                 onDeleteExpense={handleDeleteExpense}
               />
-            </div>
-          </div>
-        </BrowserRouter>
-      </ColorContext.Provider>
-    </>
+            } />
+            <Route path="/add" element={<AddNewExpenses />} />
+          </Routes>
+        </div>
+      </Router>
+    </ColorContext.Provider>
   );
 };
 
 export default App;
+
