@@ -1,9 +1,15 @@
+import ExpenseForm from "./ExpenseForm";
+import { useExpenses } from "../models/ExpenseContext";
+
 const AddNewExpenses = () => {
+  const { addExpense } = useExpenses();
+
   return (
     <div>
-      <h1>Routing Works</h1>
+      <ExpenseForm onAddExpense={addExpense} />
     </div>
-  )
-}
+  );
+};
 
-export default AddNewExpenses
+export default AddNewExpenses;
+

@@ -1,11 +1,13 @@
+import { useState } from "react";
 import { Button } from "@mui/material";
-import { SubmitHandler, useForm, Controller } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import Expense from "../models/Expenses";
 import categories from "../models/Data";
 import "../App.css";
 import "./globalStyles.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from "react-router-dom";
 
 type FormFields = {
   date: Date;
@@ -16,30 +18,33 @@ type FormFields = {
 
 type ExpenseFormProps = {
   onAddExpense: (expense: Expense) => void;
-  buttonColor: string;
 };
 
-const ExpenseForm = ({ onAddExpense, buttonColor }: ExpenseFormProps) => {
+const ExpenseForm = ({ onAddExpense }: ExpenseFormProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-    control,
   } = useForm<FormFields>();
- 
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<FormFields> = (data) => {
     const submitData: Expense = {
       ...data,
-   
+      date: selectedDate!,
       amount: parseFloat(data.amount),
     };
-    console.log(data);
     onAddExpense(submitData);
     reset();
-    
+    setSelectedDate(null);
+    navigate("/");
   };
+  const handleCancel = () => {
+        navigate("/");
+      };
+    
 
   return (
     <div
@@ -54,21 +59,12 @@ const ExpenseForm = ({ onAddExpense, buttonColor }: ExpenseFormProps) => {
       <h1 style={{ textAlign: "center", color: "#00215E" }}>Expense Form</h1>
       <form onSubmit={handleSubmit(onSubmit)} style={{ padding: "0 20px" }}>
         <div style={{ marginBottom: "10px" }}>
-          <Controller
-            name="date"
-            control={control}
-            rules={{ required: "Please select a date" }}
-            render={({ field }) => (
-              <DatePicker
-                selected={field.value}
-                onChange={(date) => {
-                  field.onChange(date);
-                }}
-                dateFormat="yyyy-MM-dd"
-                placeholderText="Select date"
-                className="custom-input custom-datepicker"
-              />
-            )}
+          <DatePicker
+            selected={selectedDate}
+            onChange={(date: Date | null) => setSelectedDate(date)}
+            dateFormat="yyyy-MM-dd"
+            placeholderText="Select date"
+            className="custom-input custom-datepicker"
           />
           {errors.date && (
             <div style={{ color: "red" }}>{errors.date.message}</div>
@@ -138,15 +134,14 @@ const ExpenseForm = ({ onAddExpense, buttonColor }: ExpenseFormProps) => {
             <div style={{ color: "red" }}>{errors.category.message}</div>
           )}
         </div>
-        <div style={{ marginBottom: "20px", textAlign: "center" }}>
-          <Button
-            type="submit"
-            variant="contained"
-            style={{ backgroundColor: buttonColor }}
-          >
-            Add Expense
-          </Button>
-        </div>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Button variant="outlined" color="error" onClick={handleCancel}>
+          Cancel
+        </Button>
+        <Button variant="contained" color="primary" type="submit" >
+          Add Expense
+        </Button>
+      </div>
       </form>
     </div>
   );

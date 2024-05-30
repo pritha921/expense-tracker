@@ -7,13 +7,12 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-// import DeleteIcon from "@mui/icons-material/Delete";
-import Expense from "../models/Expenses";
 import categories from "../models/Data";
-import "./globalStyles.css";
+import "../App.css";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material";
 import ExpenseItem from "./ExpenseItem";
+import { useExpenses } from "../models/ExpenseContext";
 
 const theme = createTheme({
   typography: {
@@ -21,13 +20,10 @@ const theme = createTheme({
   },
 });
 
-interface ExpenseListProps {
-  expenses: Expense[];
-  onDeleteExpense: (index: number) => void;
-}
-
-function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
+const ExpenseList = () => {
+  const { expenses, deleteExpense } = useExpenses();
   const [selectedCategory, setSelectedCategory] = useState("");
+  
   const filteredExpenses = selectedCategory
     ? expenses.filter((expense) => expense.category === selectedCategory)
     : expenses;
@@ -44,7 +40,7 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
   );
 
   const handleDelete = (index: number) => {
-    onDeleteExpense(index);
+    deleteExpense(index);
   };
 
   return (
@@ -149,6 +145,7 @@ function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
       </TableContainer>
     </ThemeProvider>
   );
-}
+};
 
 export default ExpenseList;
+
