@@ -9,6 +9,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
 
+
+
 type FormFields = {
   date: Date;
   details: string;
@@ -44,6 +46,7 @@ const ExpenseForm = ({ onAddExpense }: ExpenseFormProps) => {
   const handleCancel = () => {
         navigate("/");
       };
+
     
 
   return (
@@ -138,6 +141,7 @@ const ExpenseForm = ({ onAddExpense }: ExpenseFormProps) => {
         <Button variant="outlined" color="error" onClick={handleCancel}>
           Cancel
         </Button>
+       
         <Button variant="contained" color="primary" type="submit" >
           Add Expense
         </Button>

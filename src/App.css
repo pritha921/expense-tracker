@@ -1,14 +1,8 @@
 .custom-input {
-    width: 360px;
+    width: 318px;
     padding: 8px;
     margin-bottom: 5px;
     border-radius: 5px;
     border: 1px solid #007bff;
   }
 
-  .custom-datepicker {
-    width: 360px;
-    padding: 8px;
-    margin-bottom: 5px;
-    border-radius: 5px;
-  }
