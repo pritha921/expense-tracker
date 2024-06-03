@@ -76,7 +76,7 @@ const ExpenseList = () => {
               onChange={handleCategoryChange}
               label="Filter by Category"
             >
-              <MenuItem value="All Categories">
+              <MenuItem value="">
                 <em>All Categories</em>
               </MenuItem>
               {categories.map((category, index) => (
