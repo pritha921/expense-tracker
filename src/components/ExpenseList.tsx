@@ -55,8 +55,8 @@ const ExpenseList = () => {
           maxWidth: "90%",
           margin: "20px auto",
           padding: "20px",
-          borderRadius: "10px",
-          border: "1px solid #e0e0e0",
+          border: "1px solid #007bff",
+          borderRadius: "5px"
         }}
       >
         <div
