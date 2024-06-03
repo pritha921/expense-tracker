@@ -1,7 +1,6 @@
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-// import Typography from "@mui/material/Typography";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -56,9 +55,6 @@ export default function ButtonAppBar() {
           </Box>
 
           <Link to="/add" style={{ color: "#ffffff" }}>
-            {/* <button style={{ color: 'inherit', background: 'none', border: 'none' }}>
-              Add New Expense
-            </button> */}
 
             <img
               src={addNewExpenses}
